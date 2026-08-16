@@ -1,0 +1,19 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/approval/v1
+title: CDOS Approval
+type: object
+required: [schema, id, requested_by, action, resource, status, created_at]
+properties:
+  schema: {const: cdos.approval/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  requested_by: {type: object, required: [type, id], properties: {type: {enum: [human, agent, service]}, id: {type: string}}}
+  action: {type: string}
+  resource: {type: object, required: [type, id], properties: {type: {type: string}, id: {type: string}}}
+  context: {type: object}
+  status: {enum: [pending, granted, rejected, expired, revoked]}
+  resolved_by: {type: [object, 'null']}
+  created_at: {type: string, format: date-time}
+  expires_at: {type: string, format: date-time}
+  reason: {type: string}
+additionalProperties: false
+

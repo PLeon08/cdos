@@ -1,0 +1,17 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/notification/v1
+title: CDOS Notification
+type: object
+required: [schema, id, type, severity, recipients, payload, created_at]
+properties:
+  schema: {const: cdos.notification/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  type: {type: string}
+  severity: {enum: [info, warning, error, critical]}
+  recipients: {type: array, items: {type: object, required: [type, id], properties: {type: {enum: [human, agent, service]}, id: {type: string}}}, minItems: 1}
+  correlation_id: {type: string}
+  payload: {type: object}
+  created_at: {type: string, format: date-time}
+  expires_at: {type: [string, 'null'], format: date-time}
+additionalProperties: false
+

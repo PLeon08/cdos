@@ -1,0 +1,17 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/workflow/v1
+title: CDOS Workflow
+type: object
+required: [schema, id, name, project_id, tasks]
+properties:
+  schema: {const: cdos.workflow/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  name: {type: string}
+  project_id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  status: {enum: [created, running, paused, blocked, completed, failed, cancelled]}
+  tasks: {type: array, items: {type: string}, minItems: 1, uniqueItems: true}
+  dependencies: {type: array, items: {type: object, required: [from, to], properties: {from: {type: string}, to: {type: string}, condition: {type: string}}}}
+  inputs: {type: object}
+  outputs: {type: object}
+additionalProperties: false
+

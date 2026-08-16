@@ -1,0 +1,15 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/command/v1
+title: CDOS Command
+type: object
+required: [schema, command_id, command_type, timestamp, target, correlation_id, payload]
+properties:
+  schema: {const: cdos.command/v1}
+  command_id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  command_type: {type: string, pattern: '^cdos\\.[a-z]+(\\.[a-z_]+)+$'}
+  timestamp: {type: string, format: date-time}
+  target: {type: object, required: [component], properties: {component: {type: string}, id: {type: string}}}
+  correlation_id: {type: string}
+  payload: {type: object}
+additionalProperties: false
+

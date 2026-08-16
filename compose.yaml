@@ -1,0 +1,9 @@
+services:
+  cdos:
+    build:
+      context: .
+    ports:
+      - "4173:4173"
+    volumes:
+      - ./.cdos:/app/.cdos
+    restart: unless-stopped

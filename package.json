@@ -1,0 +1,17 @@
+{
+  "name": "cdos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first CDOS MVP",
+  "type": "module",
+  "bin": {
+    "cdos": "./bin/cdos.js"
+  },
+  "scripts": {
+    "cdos": "node ./bin/cdos.js",
+    "test": "node --test test/cli.test.js test/policy.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

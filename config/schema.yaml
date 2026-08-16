@@ -1,0 +1,33 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/config/v1
+title: CDOS configuration
+type: object
+required: [schema, profile, runtime, messaging, security, storage]
+properties:
+  schema: {const: cdos.config/v1}
+  profile: {enum: [development, testing, staging, production]}
+  runtime:
+    type: object
+    required: [adapter, max_concurrent_agents]
+    properties:
+      adapter: {type: string}
+      max_concurrent_agents: {type: integer, minimum: 1}
+  messaging:
+    type: object
+    required: [adapter, delivery]
+    properties:
+      adapter: {type: string}
+      delivery: {enum: [at_most_once, at_least_once]}
+  security:
+    type: object
+    required: [default_decision]
+    properties:
+      default_decision: {const: deny}
+      require_human_approval_for: {type: array, items: {type: string}}
+  storage:
+    type: object
+    required: [adapter, dsn]
+    properties:
+      adapter: {type: string}
+      dsn: {type: string}
+additionalProperties: false

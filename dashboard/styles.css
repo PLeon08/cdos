@@ -1,0 +1,14 @@
+:root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #10131a; color: #edf1fa; }
+* { box-sizing: border-box; }
+body { margin: 0; background: radial-gradient(circle at 85% -10%, #253b69, transparent 38rem), #10131a; min-height: 100vh; }
+header, main { width: min(1080px, calc(100% - 2rem)); margin: auto; }
+header { padding: 3rem 0 2rem; display: flex; justify-content: space-between; align-items: end; gap: 1rem; }
+h1, h2, p { margin: 0; } h1 { font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.06em; } h2 { font-size: 1rem; margin-bottom: 1rem; }
+.eyebrow, small, #updated { color: #9da9c1; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; } #updated { text-align: right; text-transform: none; letter-spacing: 0; }
+.metrics, .grid { display: grid; gap: 1rem; } .metrics { grid-template-columns: repeat(3, 1fr); margin-bottom: 1rem; } .grid { grid-template-columns: repeat(2, 1fr); margin-bottom: 1rem; }
+.metrics article, .panel { border: 1px solid #2b3448; background: rgba(19, 25, 38, .85); border-radius: 14px; padding: 1.25rem; box-shadow: 0 14px 32px rgba(0,0,0,.16); }
+.metrics span { color: #9da9c1; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; } .metrics strong { display: block; font-size: 2rem; margin-top: .35rem; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem 0; border-top: 1px solid #263044; } .row:first-child { border-top: 0; padding-top: 0; } .row strong, .row small { display: block; } .row small { margin-top: .25rem; text-transform: none; letter-spacing: 0; }
+.badge { border-radius: 999px; padding: .25rem .55rem; color: #a9f5d1; background: #113d30; font-size: .75rem; text-transform: uppercase; } .badge.completed { color: #9ed6ff; background: #153b56; } .badge.created, .badge.waiting { color: #f5d58f; background: #4a3714; }
+.event { display: block; }.empty { color: #9da9c1; padding: .5rem 0; }
+@media (max-width: 680px) { header { align-items: start; flex-direction: column; } #updated { text-align: left; } .metrics, .grid { grid-template-columns: 1fr 1fr; } .grid { grid-template-columns: 1fr; } }

@@ -1,0 +1,10 @@
+.git
+.cdos
+node_modules
+coverage
+*.log
+docs
+schemas
+specs
+interfaces
+decisions

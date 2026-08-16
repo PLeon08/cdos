@@ -1,0 +1,17 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/skill/v1
+title: CDOS Skill
+type: object
+required: [schema, id, name, version, capabilities]
+properties:
+  schema: {const: cdos.skill/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  name: {type: string}
+  version: {type: string, pattern: '^\\d+\\.\\d+\\.\\d+$'}
+  description: {type: string}
+  capabilities: {type: array, items: {type: string}, minItems: 1, uniqueItems: true}
+  inputs: {type: object}
+  outputs: {type: object}
+  constraints: {type: object}
+additionalProperties: false
+

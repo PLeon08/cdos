@@ -1,0 +1,21 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/agent/v1
+title: CDOS Agent
+type: object
+required: [schema, id, name, role, capabilities, permissions]
+properties:
+  schema: {const: cdos.agent/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  name: {type: string, minLength: 1}
+  description: {type: string}
+  role: {type: string, minLength: 1}
+  parent: {oneOf: [{$ref: '../common/definitions.yaml#/$defs/id'}, {type: 'null'}]}
+  capabilities: {type: array, items: {type: string}, uniqueItems: true}
+  skills: {type: array, items: {type: string}, uniqueItems: true}
+  tools: {type: array, items: {type: string}, uniqueItems: true}
+  permissions: {type: array, items: {type: string}, uniqueItems: true}
+  delegation: {type: object, properties: {max_depth: {type: integer, minimum: 0}, allowed_roles: {type: array, items: {type: string}}}}
+  lifecycle: {type: object, properties: {initial_state: {enum: [created, ready]}, restart_policy: {enum: [never, on_failure]}}}
+  metadata: {type: object}
+additionalProperties: false
+

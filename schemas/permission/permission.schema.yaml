@@ -1,0 +1,16 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/permission/v1
+title: CDOS Permission Decision
+type: object
+required: [schema, subject, action, resource, decision]
+properties:
+  schema: {const: cdos.permission/v1}
+  subject: {type: object, required: [type, id], properties: {type: {enum: [human, agent, service]}, id: {type: string}}}
+  action: {type: string}
+  resource: {type: object, required: [type, id], properties: {type: {type: string}, id: {type: string}}}
+  context: {type: object}
+  decision: {enum: [allow, deny, require_approval]}
+  reason: {type: string}
+  expires_at: {type: string, format: date-time}
+additionalProperties: false
+

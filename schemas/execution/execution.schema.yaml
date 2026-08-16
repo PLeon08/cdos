@@ -1,0 +1,20 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/execution/v1
+title: CDOS Execution
+type: object
+required: [schema, id, agent_id, task_id, status, started_at]
+properties:
+  schema: {const: cdos.execution/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  agent_id: {type: string}
+  task_id: {type: string}
+  session_id: {type: string}
+  status: {enum: [starting, running, waiting, paused, completed, failed, cancelled]}
+  started_at: {type: string, format: date-time}
+  ended_at: {type: [string, 'null'], format: date-time}
+  sandbox_policy_id: {type: string}
+  context_ref: {type: string}
+  usage: {type: object}
+  error: {type: [object, 'null']}
+additionalProperties: false
+

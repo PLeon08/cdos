@@ -1,0 +1,14 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/sandbox-policy/v1
+title: CDOS Sandbox Policy
+type: object
+required: [schema, id, filesystem, network, processes, resources]
+properties:
+  schema: {const: cdos.sandbox-policy/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  filesystem: {type: object, required: [workspace, read, write], properties: {workspace: {type: string}, read: {type: array, items: {type: string}}, write: {type: array, items: {type: string}}}}
+  network: {type: object, required: [mode], properties: {mode: {enum: [none, allowlist, unrestricted]}, allowlist: {type: array, items: {type: string}}}}
+  processes: {type: object, required: [allowed], properties: {allowed: {type: array, items: {type: string}}, shell: {type: boolean}}}
+  resources: {type: object, required: [timeout_seconds], properties: {timeout_seconds: {type: integer, minimum: 1}, memory_mb: {type: integer, minimum: 1}, cpu_cores: {type: number, exclusiveMinimum: 0}, disk_mb: {type: integer, minimum: 1}}}
+additionalProperties: false
+

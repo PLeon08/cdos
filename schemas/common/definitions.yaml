@@ -1,0 +1,6 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/common/definitions
+$defs:
+  id:
+    type: string
+    pattern: '^[a-z][a-z0-9_-]{2,127}$'

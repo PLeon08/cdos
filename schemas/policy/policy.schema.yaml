@@ -1,0 +1,17 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/policy/v1
+title: CDOS Policy
+type: object
+required: [schema, id, effect, subjects, actions, resources]
+properties:
+  schema: {const: cdos.policy/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  effect: {enum: [allow, deny, require_approval]}
+  subjects: {type: array, items: {type: object}, minItems: 1}
+  actions: {type: array, items: {type: string}, minItems: 1}
+  resources: {type: array, items: {type: object}, minItems: 1}
+  conditions: {type: object}
+  priority: {type: integer, minimum: 0}
+  expires_at: {type: string, format: date-time}
+additionalProperties: false
+

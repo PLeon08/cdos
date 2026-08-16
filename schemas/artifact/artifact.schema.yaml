@@ -1,0 +1,20 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/artifact/v1
+title: CDOS Artifact
+type: object
+required: [schema, id, kind, project_id, created_by, created_at, uri, version]
+properties:
+  schema: {const: cdos.artifact/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  kind: {enum: [source, document, image, build, report, dataset, other]}
+  project_id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  task_id: {type: [string, 'null']}
+  created_by: {type: object, required: [type, id], properties: {type: {enum: [human, agent, system]}, id: {type: string}}}
+  created_at: {type: string, format: date-time}
+  uri: {type: string}
+  version: {type: integer, minimum: 1}
+  checksum: {type: string}
+  status: {enum: [draft, review, approved, rejected, archived]}
+  metadata: {type: object}
+additionalProperties: false
+

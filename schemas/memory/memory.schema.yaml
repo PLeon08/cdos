@@ -1,0 +1,18 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/memory/v1
+title: CDOS Memory
+type: object
+required: [schema, id, scope, content, sensitivity, created_at, provenance]
+properties:
+  schema: {const: cdos.memory/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  scope: {type: object, required: [kind, id], properties: {kind: {enum: [system, project, agent, task]}, id: {type: string}}}
+  content: {type: object}
+  sensitivity: {enum: [public, internal, confidential, restricted]}
+  retention: {enum: [ephemeral, session, project, persistent]}
+  created_at: {type: string, format: date-time}
+  expires_at: {type: [string, 'null'], format: date-time}
+  provenance: {type: object, required: [source_type], properties: {source_type: {enum: [human, agent, tool, system]}, source_id: {type: string}, event_id: {type: string}}}
+  metadata: {type: object}
+additionalProperties: false
+

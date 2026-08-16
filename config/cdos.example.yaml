@@ -1,0 +1,20 @@
+schema: cdos.config/v1
+profile: development
+runtime:
+  adapter: local
+  max_concurrent_agents: 4
+messaging:
+  adapter: in_memory
+  delivery: at_least_once
+security:
+  default_decision: deny
+  require_human_approval_for:
+    - secret.read
+    - network.unrestricted
+    - filesystem.outside_workspace
+storage:
+  adapter: sqlite
+  dsn: "sqlite:///cdos.db"
+observability:
+  log_level: info
+

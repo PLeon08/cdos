@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CDOS Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div><p class="eyebrow">CDOS · LOCAL MVP</p><h1>Control plane</h1></div>
+      <p id="updated">Loading state…</p>
+    </header>
+    <main>
+      <section class="metrics" aria-label="System status">
+        <article><span>Agents</span><strong id="agent-count">—</strong></article>
+        <article><span>Workflows</span><strong id="workflow-count">—</strong></article>
+        <article><span>Tasks</span><strong id="task-count">—</strong></article>
+        <article><span>Events</span><strong id="event-count">—</strong></article>
+      </section>
+      <section class="grid">
+        <article class="panel"><h2>Agents</h2><div id="agents"></div></article>
+        <article class="panel"><h2>Workflows</h2><div id="workflows"></div></article>
+      </section>
+      <section class="panel"><h2>Tasks</h2><div id="tasks"></div></section>
+      <section class="panel"><h2>Recent events</h2><div id="events"></div></section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

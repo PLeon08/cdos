@@ -1,0 +1,15 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/cost-record/v1
+title: CDOS Cost Record
+type: object
+required: [schema, id, timestamp, subject, quantity, unit]
+properties:
+  schema: {const: cdos.cost-record/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  timestamp: {type: string, format: date-time}
+  subject: {type: object, properties: {project_id: {type: string}, workflow_id: {type: string}, task_id: {type: string}, agent_id: {type: string}, model: {type: string}}}
+  quantity: {type: number, minimum: 0}
+  unit: {enum: [usd, token, second, byte]}
+  category: {enum: [model, tool, storage, network, compute]}
+  metadata: {type: object}
+additionalProperties: false

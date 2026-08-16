@@ -1,0 +1,19 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/delegation/v1
+title: CDOS Delegation
+type: object
+required: [schema, id, delegator, task_id, status, created_at]
+properties:
+  schema: {const: cdos.delegation/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  delegator: {type: object, required: [id], properties: {id: {type: string}, role: {type: string}}}
+  delegatee: {type: [object, 'null'], properties: {id: {type: string}, role: {type: string}}}
+  task_id: {type: string}
+  permitted_actions: {type: array, items: {type: string}, uniqueItems: true}
+  depth: {type: integer, minimum: 0}
+  status: {enum: [requested, assigned, declined, completed, revoked]}
+  created_at: {type: string, format: date-time}
+  expires_at: {type: [string, 'null'], format: date-time}
+  constraints: {type: object}
+additionalProperties: false
+

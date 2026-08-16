@@ -1,0 +1,17 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/event/v1
+title: CDOS Event
+type: object
+required: [schema, event_id, event_type, timestamp, source, correlation_id, payload]
+properties:
+  schema: {const: cdos.event/v1}
+  event_id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  event_type: {type: string, pattern: '^cdos\\.[a-z]+(\\.[a-z_]+)+$'}
+  timestamp: {type: string, format: date-time}
+  source: {type: object, required: [component], properties: {component: {type: string}, instance: {type: string}}}
+  actor: {type: object, properties: {type: {enum: [human, agent, system]}, id: {type: string}}}
+  correlation_id: {type: string}
+  causation_id: {type: [string, 'null']}
+  payload: {type: object}
+additionalProperties: false
+

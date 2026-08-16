@@ -1,0 +1,16 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/project/v1
+title: CDOS Project
+type: object
+required: [schema, id, name, status, workspace]
+properties:
+  schema: {const: cdos.project/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  name: {type: string, minLength: 1}
+  description: {type: string}
+  status: {enum: [active, paused, archived]}
+  workspace: {type: string}
+  owners: {type: array, items: {type: string}, minItems: 1}
+  policies: {type: array, items: {type: string}, uniqueItems: true}
+  metadata: {type: object}
+additionalProperties: false

@@ -1,0 +1,17 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: cdos://schemas/tool/v1
+title: CDOS Tool
+type: object
+required: [schema, id, name, kind, actions]
+properties:
+  schema: {const: cdos.tool/v1}
+  id: {$ref: '../common/definitions.yaml#/$defs/id'}
+  name: {type: string}
+  kind: {enum: [builtin, mcp, plugin, external]}
+  actions: {type: array, items: {type: string}, minItems: 1, uniqueItems: true}
+  input_schema: {type: object}
+  output_schema: {type: object}
+  provider: {type: object, properties: {adapter: {type: string}, endpoint: {type: string}}}
+  risk: {enum: [low, medium, high, critical]}
+additionalProperties: false
+
