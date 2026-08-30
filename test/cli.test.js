@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp } from 'node:fs/promises';
+import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { runCli } from '../src/cli.js';
@@ -21,6 +21,17 @@ test('initializes, creates and completes a task with events', async () => {
   assert.equal(completed.status, 'completed');
   const state = await load(directory);
   assert.deepEqual(state.events.map((event) => event.event_type), ['cdos.task.created', 'cdos.task.started', 'cdos.task.completed']);
+});
+
+test('initialization provisions Claude Code instructions without overwriting project instructions', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cdos-test-'));
+  await writeFile(join(directory, 'CLAUDE.md'), '# Project conventions\n', 'utf8');
+  await invoke(['init'], directory);
+  const projectInstructions = await readFile(join(directory, 'CLAUDE.md'), 'utf8');
+  const cdosInstructions = await readFile(join(directory, '.cdos', 'claude.md'), 'utf8');
+  assert.match(projectInstructions, /# Project conventions/);
+  assert.match(projectInstructions, /@\.cdos\/claude\.md/);
+  assert.match(cdosInstructions, /npx cdos workflow plan/);
 });
 
 test('rejects task statuses outside the contract', async () => {

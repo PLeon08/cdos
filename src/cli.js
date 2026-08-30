@@ -14,7 +14,7 @@ const taskStates = new Set(['created', 'planned', 'assigned', 'ready', 'running'
 const help = `CDOS v0.1 — local MVP
 
 Usage:
-  cdos init
+  cdos init                    Initialize CDOS and configure Claude Code instructions
   cdos doctor
   cdos validate
   cdos agent list
@@ -55,7 +55,8 @@ export async function runCli(args, { workingDirectory = cwd(), out = console.log
   if (!area || area === '--help' || area === 'help') return out(help);
   if (area === 'init') {
     const result = await initialize(workingDirectory);
-    return out(result.created ? 'CDOS initialized in .cdos/' : 'CDOS is already initialized.');
+    const stateMessage = result.created ? 'CDOS initialized in .cdos/.' : 'CDOS is already initialized.';
+    return out(`${stateMessage} Claude Code instructions are available through CLAUDE.md.`);
   }
   if (area === 'dashboard') {
     const port = Number(option([action, ...rest], '--port', '4173'));
