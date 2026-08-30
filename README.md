@@ -1,5 +1,26 @@
 # CDOS
 
+CDOS is a lightweight companion for Claude Code. Install it in a project, initialize it once, open Claude Code, and work in natural language while CDOS records workflow, tasks, approvals, and verification.
+
+## Intended flow
+
+```powershell
+cd my-project
+npm install -D @pleon/cdos
+npx cdos init
+claude
+```
+
+Then tell Claude Code, for example: **"Prepare and deploy this project."** The initializer creates `.cdos/` and a small `CLAUDE.md` import so Claude has the CDOS workflow in its project context. It never overwrites an existing `CLAUDE.md`.
+
+For development before the package is published to npm, install directly from GitHub:
+
+```powershell
+npm install -D github:PLeon08/cdos#main
+```
+
+Claude Code still asks for its normal permissions before changing files or running deployments. CDOS adds workflow tracking and its own explicit approval records; it does not bypass Claude Code safeguards.
+
 CDOS (Collaborative Development Operating System) is a model-agnostic control plane for governed multi-agent software work. It defines contracts and architecture before selecting a runtime, model provider, storage engine, or message broker.
 
 ## Status

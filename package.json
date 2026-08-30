@@ -1,11 +1,21 @@
 {
-  "name": "cdos",
+  "name": "@pleon/cdos",
   "version": "0.1.0",
-  "private": true,
-  "description": "Local-first CDOS MVP",
+  "private": false,
+  "description": "Lightweight project-orchestration companion for Claude Code",
   "type": "module",
   "bin": {
     "cdos": "./bin/cdos.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "dashboard",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "cdos": "node ./bin/cdos.js",
