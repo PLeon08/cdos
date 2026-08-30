@@ -10,6 +10,14 @@ import { inspectGit } from './integrations/git.js';
 import { buildDockerImage, inspectDocker, runDockerTests } from './integrations/docker.js';
 
 const taskStates = new Set(['created', 'planned', 'assigned', 'ready', 'running', 'waiting', 'blocked', 'review', 'completed', 'failed', 'cancelled']);
+const taskStateAliases = new Map([
+  ['pending', 'created'],
+  ['queued', 'ready'],
+  ['in_progress', 'running'],
+  ['in-progress', 'running'],
+  ['needs_review', 'review'],
+  ['done', 'completed']
+]);
 
 const help = `CDOS v0.1 — local MVP
 
@@ -21,7 +29,7 @@ Usage:
   cdos task create <title> [--priority low|medium|high|critical]
   cdos task list
   cdos task run [task-id|--latest]
-  cdos task status <task-id> <status>
+  cdos task status <task-id> <status>  (for example: running, review, completed)
   cdos workflow plan <goal>
   cdos workflow list
   cdos workflow run <workflow-id|--latest>
@@ -109,7 +117,8 @@ export async function runCli(args, { workingDirectory = cwd(), out = console.log
     return printJson(task, out);
   }
   if (area === 'task' && action === 'status') {
-    const [taskId, status] = rest;
+    const [taskId, requestedStatus] = rest;
+    const status = taskStateAliases.get(requestedStatus) ?? requestedStatus;
     if (!taskStates.has(status)) throw new Error('Invalid task status.');
     const task = state.tasks.find((item) => item.id === taskId);
     if (!task) throw new Error(`Task not found: ${taskId}`);
