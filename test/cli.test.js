@@ -40,6 +40,14 @@ test('rejects task statuses outside the contract', async () => {
   await assert.rejects(() => invoke(['task', 'status', 'task-0001', 'unknown'], directory), /Invalid task status/);
 });
 
+test('accepts common agent task-status aliases', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cdos-test-'));
+  await invoke(['init'], directory);
+  const task = JSON.parse(await invoke(['task', 'create', 'Implement', 'feature'], directory));
+  const updated = JSON.parse(await invoke(['task', 'status', task.id, 'in_progress'], directory));
+  assert.equal(updated.status, 'running');
+});
+
 test('runs the latest pending task without relying on a fixed task id', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cdos-test-'));
   await invoke(['init'], directory);
